@@ -1,5 +1,4 @@
 import requests,os
-from detetime import detetime
 from time import sleep
 s=requests.Session()
 try:
