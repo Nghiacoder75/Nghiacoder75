@@ -11,7 +11,6 @@ try:
   if c==t3:
       sleep(5)
       try:
-         
          sever2 = requests.get('https://pastebin.com/raw/ry2Zxxz0').text
          if sever2=='lock':
                  print('Server Đã Ngừng Hoạt Động !!!')
@@ -28,7 +27,6 @@ try:
   if c==t3:
     sleep(5)
     try:
-       
        sever2 = requests.get('https://pastebin.com/raw/ry2Zxxz0').text
        if sever2=='lock':
                print('Server Đã Ngừng Hoạt Động !!!')
@@ -45,7 +43,6 @@ try:
   if c==t3:
     sleep(5)
     try:
-       
        sever2 = requests.get('https://pastebin.com/raw/ry2Zxxz0').text
        if sever2=='lock':
                print('Server Đã Ngừng Hoạt Động !!!')
