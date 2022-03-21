@@ -40,7 +40,7 @@ try:
   else:
     sleep(0.1)
 t = s.get("https://api.ipify.org/").text
-  c = s.get("https://pastebin.com/raw/uFhdF2uz").text
+c = s.get("https://pastebin.com/raw/uFhdF2uz").text
   if c==t3:
     sleep(5)
     try:
