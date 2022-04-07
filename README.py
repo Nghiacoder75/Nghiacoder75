@@ -11,6 +11,7 @@ import requests
 from urllib.parse import unquote
 from selenium.webdriver.common.by import By
 from time import sleep
+cookie_fb=input("Nhap cookie fb: ")
 def getrpw():
   print("Get cookie rpw ")
   sleep(2)
