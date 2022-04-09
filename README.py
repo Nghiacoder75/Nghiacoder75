@@ -448,11 +448,8 @@ while True:
          print(t3)
          print("Job Rpw")
          a=requests.post("https://www.machine-liker.com/api/get-post-info/", headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn},data={"url":url})
-         try:
-            id=a.json()["post"]["id"]
-            st=a.json()["post"]["story"]
-         except:
-            break
+         id=a.json()["post"]["id"]
+         st=a.json()["post"]["story"]
          url1=f"https://www.machine-liker.com/send-reactions/?post_id={id}&story={st}"
          a=requests.get(url1,headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn})
          obj=a.text.split('name="object_id" value="')[1].split('"')[0]
