@@ -26,6 +26,8 @@ import requests
 from urllib.parse import unquote
 from selenium.webdriver.common.by import By
 from time import sleep
+apikey=input("Api Key Anycaptcha: ")
+user=input("User-Agent: ")
 cookie_fb=input("Coookie Facebook: ")
 url=input("Link Machine-Liker: ")
 link=input("Link Rpw-liker: ")
