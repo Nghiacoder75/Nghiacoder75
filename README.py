@@ -457,12 +457,7 @@ while True:
          a=requests.get(url1,headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn})
          obj=a.text.split('name="object_id" value="')[1].split('"')[0]
          bufff=requests.post("https://www.machine-liker.com/api/send-reactions/",headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn},data={"object_id":obj,"reactions":"2","limit":"150"}).text
-         if "info" in bufff:
-           print(buff)
-         else:
-           print("Error")
-           from datetime import datetime
-           t=datetime.now().strftime('%H:%M:%S')
+         print(bufff)
          sleep(605)
          break
     except:
