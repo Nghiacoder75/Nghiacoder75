@@ -416,7 +416,7 @@ def getrpw():
   return cookierpw
 cookierpw = getrpw()
 while True:
-  for x in range(9):
+ for x in range(9):
     try:
        while True:
          t33=requests.get("https://rpwliker.com/facebook/posts",headers={
@@ -459,5 +459,5 @@ while True:
          break
     except:
       sleep(1)
-  getmch()
-  getrpw()
+ getmch()
+ getrpw()
