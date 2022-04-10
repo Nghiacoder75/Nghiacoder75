@@ -229,18 +229,17 @@ def getmch():
   driver.quit()
   return cokiemcn
 def getrpw():
-  sleep(2)
-  chromeoptions = webdriver.ChromeOptions()
-  chromeoptions.add_argument("--window-size=580,800")
-  chromeoptions.add_experimental_option("excludeSwitches", ["enable-automation"])
-  chromeoptions.add_experimental_option('excludeSwitches', ['enable-logging'])
-  prefs = {"profile.default_content_setting_values.notifications" : 2}
-  chromeoptions.add_experimental_option('useAutomationExtension', False)
-#chromeoptions.add_argument(f"--user-data-dir=D:\python\datachrome")
-  chromeoptions.add_argument('--disable-blink-features=AutomationControlled')
-#chromeoptions.add_argument('--incognito')
-  chromeoptions.add_experimental_option("prefs",prefs) 
-  driver = webdriver.Chrome(options=chromeoptions)
+  cài_đặt_web3=webdriver.ChromeOptions()
+  cài_đặt_web3.add_argument('--lang=en')
+  cài_đặt_web2=cài_đặt_web3
+  cài_đặt_web=cài_đặt_web2
+  cài_đặt_web.add_experimental_option('excludeSwitches', ['enable-logging'])
+  cài_đặt_web22=cài_đặt_web
+  cài_đặt_web22.add_argument("--window-size=580,800")
+  cài_đặt_web22.add_argument(f"user-agent={user}")
+  cài_đặt_web22.add_experimental_option('useAutomationExtension', False)
+  cài_đặt_web22.add_argument('--disable-blink-features=AutomationControlled')
+  driver = webdriver.Chrome(options=cài_đặt_web22)
   driver.set_window_position(0, 0)
   driver.get('https://rpwliker.com')
   sleep(5)
