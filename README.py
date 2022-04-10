@@ -230,7 +230,6 @@ def getmch():
   sleep(5)
   driver.quit()
   return cokiemcn
-cokiemcn = getmch()
 def getrpw():
   print("Get cookie rpw ")
   sleep(2)
@@ -415,6 +414,7 @@ def getrpw():
   driver.quit()
   return cookierpw
 cookierpw = getrpw()
+cokiemcn = getmch()
 while True:
  for x in range(9):
     try:
@@ -446,7 +446,6 @@ while True:
 "quantity":"100"
 }).text
          print(t3)
-         print("Job Rpw")
          a=requests.post("https://www.machine-liker.com/api/get-post-info/", headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn},data={"url":url})
          id=a.json()["post"]["id"]
          st=a.json()["post"]["story"]
@@ -459,5 +458,5 @@ while True:
          break
     except:
       sleep(1)
- getmch()
  getrpw()
+ getmch()
