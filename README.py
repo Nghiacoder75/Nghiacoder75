@@ -229,7 +229,6 @@ def getmch():
   driver.quit()
   return cokiemcn
 def getrpw():
-  print("Get cookie rpw ")
   sleep(2)
   chromeoptions = webdriver.ChromeOptions()
   chromeoptions.add_argument("--window-size=580,800")
@@ -456,5 +455,4 @@ while True:
          break
     except:
       sleep(1)
- getrpw()
  getmch()
