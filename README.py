@@ -468,7 +468,7 @@ while True:
          total1=check_total.split('role="button" aria-pressed="true" href="')[1].split('">Tất cả ')[0]
          total2=total1.split('total_count=')[1].split(' ')[0]
          sleep(5)
-         print("["+str(y)+"]"f"[RPW-LIKER]</>SUCCESS</>{idtds}</>TOTAL:{total2}")
+         print("["+str(x)+"]"f"[RPW-LIKER]</>SUCCESS</>{idtds}</>TOTAL:{total2}")
          a=requests.post("https://www.machine-liker.com/api/get-post-info/", headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn},data={"url":url})
          id=a.json()["post"]["id"]
          st=a.json()["post"]["story"]
@@ -478,7 +478,7 @@ while True:
          bufff=requests.post("https://www.machine-liker.com/api/send-reactions/",headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn},data={"object_id":obj,"reactions":"2","limit":"150"}).text
          like = bufff.json()["info"]["message"].split(" ")[0]
          tonglike = bufff.json()["info"]["total_reactions"]
-         if "ok" in buff:
+         if "ok" in bufff:
            print("["+str(y)+"]"f"[MACHINE-LIKER]</>SUCCESS</>{id}</>+{like}REACTION</>TOTAL:{tonglike}")
          else:
            Nghia="Nghia pro "
