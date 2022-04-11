@@ -480,8 +480,8 @@ while True:
          tonglike = bufff.json()["info"]["total_reactions"]
          if "ok" in buff:
            print("["+str(y)+"]"f"[MACHINE-LIKER]</>SUCCESS</>{id}</>+{like}REACTION</>TOTAL:{tonglike}")
-          else:
-            Nghia="Nghia pro "
+         else:
+           Nghia="Nghia pro "
          sleep(605)
          break
     except:
