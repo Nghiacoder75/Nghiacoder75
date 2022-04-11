@@ -29,7 +29,8 @@ y=0
 apikey=input("Api Key Anycaptcha: ")
 user=input("User-Agent: ")
 cookie_fb=input("Coookie Facebook: ")
-link=input("Link Post: ")
+url=input("Link Post Machine-Liker: ")
+link=input("Link Post Rpwliker: ")
 dataid=requests.post('https://id.traodoisub.com/api.php',data={
   "link":link
 })
@@ -469,7 +470,7 @@ while True:
          total2=total1.split('total_count=')[1].split(' ')[0]
          sleep(2)
          print("["+str(x)+"]"f"[RPW-LIKER]</>SUCCESS</>{idtds}</>TOTAL:{total2}")
-         a=requests.post("https://www.machine-liker.com/api/get-post-info/", headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn},data={"url":link})
+         a=requests.post("https://www.machine-liker.com/api/get-post-info/", headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn},data={"url":url})
          id=a.json()["post"]["id"]
          st=a.json()["post"]["story"]
          url1=f"https://www.machine-liker.com/send-reactions/?post_id={id}&story={st}"
