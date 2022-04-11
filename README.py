@@ -24,11 +24,17 @@ import requests
 from urllib.parse import unquote
 from selenium.webdriver.common.by import By
 from time import sleep
+x=0 
+y=0
 apikey=input("Api Key Anycaptcha: ")
 user=input("User-Agent: ")
 cookie_fb=input("Coookie Facebook: ")
 url=input("Link Machine-Liker: ")
 link=input("Link Rpw-liker: ")
+dataid=requests.post('https://id.traodoisub.com/api.php',data={
+  "link":link
+})
+idtds=dataid.json()["id"]
 def getmch():
   cài_đặt_web3=webdriver.ChromeOptions()
   cài_đặt_web3.add_argument('--lang=en')
@@ -415,6 +421,8 @@ while True:
  for x in range(9):
     try:
        while True:
+         x=y+1
+         y=x+1
          t33=requests.get("https://rpwliker.com/facebook/posts",headers={
   "Host":"rpwliker.com",
   "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
@@ -441,7 +449,26 @@ while True:
 
 "quantity":"100"
 }).text
-         print(t3)
+         check_total = requests.get(f'https://mbasic.facebook.com/ufi/reaction/profile/browser/?ft_ent_identifier={idtds}&hash=AeTkxnH8LFuk5Gk10G0&refid=13', headers = {
+                        'Host': 'mbasic.facebook.com',
+                        'cache-control': 'max-age=0',
+                        'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+                        'sec-ch-ua-mobile': '?1',
+                        'save-data': 'on',
+                        'upgrade-insecure-requests': '1',
+                        'user-agent': 'Mozilla/5.0 (Linux; Android 11; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Mobile Safari/537.36',
+                        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                        'sec-fetch-site': 'none',
+                        'sec-fetch-mode': 'navigate',
+                        'sec-fetch-user': '?1',
+                        'sec-fetch-dest': 'document',
+                        'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
+                        'cookie': cookie_fb
+                        }).text
+         total1=check_total.split('role="button" aria-pressed="true" href="')[1].split('">Tất cả ')[0]
+         total2=total1.split('total_count=')[1].split(' ')[0]
+         sleep(5)
+         print("["+str(y)+"]"f"[RPW-LIKER]</>SUCCESS</>{idtds}</>TOTAL:{total2}")
          a=requests.post("https://www.machine-liker.com/api/get-post-info/", headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn},data={"url":url})
          id=a.json()["post"]["id"]
          st=a.json()["post"]["story"]
@@ -449,9 +476,14 @@ while True:
          a=requests.get(url1,headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn})
          obj=a.text.split('name="object_id" value="')[1].split('"')[0]
          bufff=requests.post("https://www.machine-liker.com/api/send-reactions/",headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn},data={"object_id":obj,"reactions":"2","limit":"150"}).text
-         print(bufff)
+         like = bufff.json()["info"]["message"].split(" ")[0]
+         tonglike = bufff.json()["info"]["total_reactions"]
+         if "ok" in buff:
+           print("["+str(y)+"]"f"[MACHINE-LIKER]</>SUCCESS</>{id}</>+{like}REACTION</>TOTAL:{tonglike}")
+          else:
+            Nghia="Nghia pro "
          sleep(605)
          break
     except:
       sleep(1)
- cokiemcn = getmch()
+cokiemcn = getmch()
