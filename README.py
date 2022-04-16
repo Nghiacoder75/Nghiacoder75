@@ -9,7 +9,7 @@ from time import sleep
 import base64
 import warnings,threading
 from six.moves.urllib_parse import urljoin
-import os,json,requests,string, base64, six
+import os,sys,json,requests,string, base64, six
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium import webdriver
@@ -24,13 +24,69 @@ import requests
 from urllib.parse import unquote
 from selenium.webdriver.common.by import By
 from time import sleep
+xanh = '\033[1;35m';
+cay = '\033[1;92m';
+do = '\033[1;31m';
+trang = '\033[1;97m';
+vang = '\033[1;93m';
 x=0 
 y=0
-apikey=input("Api Key Anycaptcha: ")
-user=input("User-Agent: ")
-cookie_fb=input("Coookie Facebook: ")
-url=input("Link Post Machine-Liker: ")
-link=input("Link Post Rpwliker: ")
+def rundelay(k):
+  while (k>0):
+    
+    k=k-1
+    print(f'\033[1;97m◈ \033[1;35m[\033[1;93m|\033[1;31m] \033[0;36mVui Lòng Đợi '+str(k), end='\r')
+    sleep(0.25)
+    print(f'  \033[1;31m[\033[1;92m/\033[1;35m] \033[0;36mVui Lòng Đợi '+str(k), end='\r')
+    sleep(0.25)
+    print(f'\033[1;96m◈ \033[1;35m[\033[0;36m-\033[1;31m] \033[0;36mVui Lòng Đợi '+str(k), end='\r')
+    sleep(0.25)
+    print(f'  \033[1;31m[\033[1;35m\\\033[1;35m] \033[0;36mVui Lòng Đợi '+str(k), end='\r')
+    sleep(0.25)
+def logo():
+    log="""
+   \033[1;32m███╗░░██╗████████╗██████╗░
+   \033[1;33m████╗░██║╚══██╔══╝██╔══██╗
+   \033[1;34m██╔██╗██║░░░██║░░░██║░░██║
+   \033[1;36m██║╚████║░░░██║░░░██║░░██║
+   \033[1;31m██║░╚███║░░░██║░░░██████╔╝
+   \033[1;36m╚═╝░░╚══╝░░░╚═╝░░░╚═════╝░
+ \033[1;37m- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ \033[1;31mCopyright By: \033[1;32mNguyễn Tiến Dũng
+ \033[1;37m- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ \033[1;32mTool Bạn Đang Dùng: \033[1;36m Machine-Liker Bybass Cloudflare
+ \033[1;32mChúc Bạn Sử Dụng Tool Vui Vẻ Thanks !
+ \033[1;37m- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ \033[1;32mMua Sub - Like Tại:\033[1;33m AUTOFB07.COM
+ \033[1;32mFB Admin: \033[1;36mhttps://www.facebook.com/user.nguyentiendungg
+ \033[1;32mZalo Admin: \033[1;36m0336825294
+ \033[1;37m- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"""
+    print(log)
+logo()
+apikey=input("\033[1;37m➻\033[1;96m❥\033[1;96m Api Key Anycaptcha:\033[1;33m ")
+user=input("\033[1;37m➻\033[1;96m❥\033[1;96m User-Agent:\033[1;33m ")
+cookie_fb=input("\033[1;37m➻\033[1;96m❥\033[1;96m Coookie Facebook:\033[1;33m ")
+url=input("\033[1;37m➻\033[1;96m❥\033[1;96m Link Post Machine-Liker: \033[1;33m")
+link=input("\033[1;37m➻\033[1;96m❥\033[1;96m Link Post Rpwliker: \033[1;33m")
+import sys
+o=""" \033[1;37m[\033[1;31m1\033[1;37m] \033[1;31m=> \033[1;32mBUFF LIKE
+ \033[1;37m[\033[1;31m2\033[1;37m] \033[1;31m=> \033[1;32mBUFF LOVE
+ \033[1;37m[\033[1;31m3\033[1;37m] \033[1;31m=> \033[1;32mBUFF WOW
+ \033[1;37m[\033[1;31m4\033[1;37m] \033[1;31m=> \033[1;32mBUFF HAHA
+ \033[1;37m[\033[1;31m7\033[1;37m] \033[1;31m=> \033[1;32mBUFF BUỒN
+ \033[1;37m[\033[1;31m8\033[1;37m] \033[1;31m=> \033[1;32mBUFF PHẪN NỘ
+ \033[1;37m[\033[1;31m16\033[1;37m] \033[1;31m=> \033[1;32mBUFF THƯƠNG THƯƠNG
+ \033[1;37m[\033[1;31m999\033[1;37m] \033[1;31m=> \033[1;32mBUFF ALL
+ \033[1;37m- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+"""
+for oo in o:
+	sys.stdout.write(oo)
+	sys.stdout.flush()
+	sleep(0.003)
+print(' \033[1;37m➻\033[1;96m❥ Mỗi Số Ngăn Cách Bởi Dấu \033[1;37m"\033[1;33m,\033[1;37m" \033[1;31m[\033[1;32m 1,2,3\033[1;31m ]')
+cxmch=input(' \033[1;37m➻\033[1;96m❥ Nhập Loại Cảm Xúc: \033[1;33m')
+if cxmch == '999':
+	cxmch="1,2,3,4,7,8,16"
 dataid=requests.post('https://id.traodoisub.com/api.php',data={
   "link":link
 })
@@ -233,6 +289,7 @@ def getmch():
   giaicapt = requests.post('https://www.machine-liker.com/verify/',data=datavuotcap,headers=headersa)
   sleep(5)
   driver.quit()
+  os.system("clear")
   return cokiemcn
 def getrpw():
   cài_đặt_web3=webdriver.ChromeOptions()
@@ -417,6 +474,7 @@ def getrpw():
   return cookierpw
 cookierpw = getrpw()
 cokiemcn = getmch()
+logo()
 while True:
  for x in range(9):
     try:
@@ -449,7 +507,7 @@ while True:
 
 "quantity":"100"
 }).text
-         sleep(15)
+         sleep(30)
          check_total = requests.get(f'https://mbasic.facebook.com/ufi/reaction/profile/browser/?ft_ent_identifier={idtds}&hash=AeTkxnH8LFuk5Gk10G0&refid=13', headers = {
                         'Host': 'mbasic.facebook.com',
                         'cache-control': 'max-age=0',
@@ -468,23 +526,26 @@ while True:
                         }).text
          total1=check_total.split('role="button" aria-pressed="true" href="')[1].split('">Tất cả ')[0]
          total2=total1.split('total_count=')[1].split(' ')[0]
-         sleep(2)
-         print("["+str(x)+"]"f"[RPW-LIKER]</>SUCCESS</>{idtds}</>TOTAL:{total2}")
+         sleep(5)
+         print(f"\033[1;31m[\033[1;92mTIEN DUNG\033[1;31m]\033[1;31m\033[1;31m[\033[1;97m"+str(x)+f"\033[1;31m]\033[1;31m\033[1;31m[\033[1;92mRPW-LIKER\033[1;31m]\033[1;31m{trang} => {xanh}Thành Công{trang} => {xanh}{idtds}{trang} => {vang}{total2} Reactions")
          a=requests.post("https://www.machine-liker.com/api/get-post-info/", headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn},data={"url":url})
          id=a.json()["post"]["id"]
          st=a.json()["post"]["story"]
          url1=f"https://www.machine-liker.com/send-reactions/?post_id={id}&story={st}"
          a=requests.get(url1,headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn})
          obj=a.text.split('name="object_id" value="')[1].split('"')[0]
-         bufff=requests.post("https://www.machine-liker.com/api/send-reactions/",headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn},data={"object_id":obj,"reactions":"2","limit":"150"}).text
-         sleep(10)
-         check_totalmch = requests.get(f'https://mbasic.facebook.com/ufi/reaction/profile/browser/?ft_ent_identifier={idtds}&hash=AeTkxnH8LFuk5Gk10G0&refid=13', headers = {
+         bufff=requests.post("https://www.machine-liker.com/api/send-reactions/",headers={"Host":"www.machine-liker.com","x-requested-with":"XMLHttpRequest","user-agent":user,"origin":"https://www.machine-liker.com","content-type":"application/x-www-form-urlencoded; charset=UTF-8","referer":"https://www.machine-liker.com/auto-reactions/","cookie":cokiemcn},data={"object_id":obj,"reactions":cxmch,"limit":"150"}).text
+         sleep(15)
+         check_totalmch = requests.get(f'https://mbasic.facebook.com/ufi/reaction/profile/browser/?ft_ent_identifier={id}&hash=AeTkxnH8LFuk5Gk10G0&refid=13', headers = {
                         'Host': 'mbasic.facebook.com',
                         'cache-control': 'max-age=0',
                         'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
                         'sec-ch-ua-mobile': '?1',
                         'save-data': 'on',
                         'upgrade-insecure-requests': '1',
+                        'user-agent': 'Mozilla/5.0 (Linux; Android 11; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Mobile Safari/537.36',
+                        'user-agent': 'Mozilla/5.0 (Linux; Android 11; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Mobile Safari/537.36',
+                        'user-agent': 'Mozilla/5.0 (Linux; Android 11; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Mobile Safari/537.36',
                         'user-agent': 'Mozilla/5.0 (Linux; Android 11; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Mobile Safari/537.36',
                         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
                         'sec-fetch-site': 'none',
@@ -496,8 +557,9 @@ while True:
                         }).text
          total1mch=check_totalmch.split('role="button" aria-pressed="true" href="')[1].split('">Tất cả ')[0]
          total2mch=total1mch.split('total_count=')[1].split(' ')[0]
-         print("["+str(y)+"]"f"[MACHINE-LIKER]</>SUCCESS</>{idtds}</>TOTAL:{total2mch}")
-         sleep(605)
+         print("\033[1;31m[\033[1;92mTIEN DUNG\033[1;31m]\033[1;31m\033[1;31m[\033[1;97m"+str(y)+f"\033[1;31m]\033[1;31m\033[1;31m[\033[1;92mMACHINE-LIKER\033[1;31m]\033[1;31m{trang} => {xanh}Thành Công{trang} => {xanh}{id}{trang} => {vang}{total2mch} Reactions")
+         k=605
+         rundelay(k)
          break
     except:
       sleep(1)
