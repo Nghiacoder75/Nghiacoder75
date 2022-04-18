@@ -156,7 +156,11 @@ def getmch():
                             'user_code': code
                         }
   url_c = requests.post('https://mbasic.facebook.com/device/redirect/', headers=headers, data=data).url
-  url_f = unquote(url_c).split('&next=')[1]
+  try:
+    url_f = unquote(url_c).split('&next=')[1]
+    break
+  except:
+    time.sleep(0.8)
   headers = {
                             'Host': 'mbasic.facebook.com',
                             'cache-control': 'max-age=0',
@@ -353,7 +357,11 @@ def getrpw():
                             'user_code': code
                         }
   url_c = requests.post('https://mbasic.facebook.com/device/redirect/', headers=headers, data=data).url
-  url_f = unquote(url_c).split('&next=')[1]
+  try:
+    url_f = unquote(url_c).split('&next=')[1]
+    break
+  except:
+    time.sleep(0.8)
   headers = {
                             'Host': 'mbasic.facebook.com',
                             'cache-control': 'max-age=0',
