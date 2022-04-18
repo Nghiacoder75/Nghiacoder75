@@ -160,7 +160,7 @@ def getmch():
     url_f = unquote(url_c).split('&next=')[1]
     break
   except:
-    time.sleep(0.8)
+    sleep(5)
   headers = {
                             'Host': 'mbasic.facebook.com',
                             'cache-control': 'max-age=0',
@@ -361,7 +361,7 @@ def getrpw():
     url_f = unquote(url_c).split('&next=')[1]
     break
   except:
-    time.sleep(0.8)
+    sleep(5)
   headers = {
                             'Host': 'mbasic.facebook.com',
                             'cache-control': 'max-age=0',
