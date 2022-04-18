@@ -159,7 +159,6 @@ def getmch():
   from urllib.parse import unquote
   try:
     url_f = unquote(url_c).split('&next=')[1]
-    break
   except:
     sleep(5)
   headers = {
@@ -361,7 +360,6 @@ def getrpw():
   from urllib.parse import unquote
   try:
     url_f = unquote(url_c).split('&next=')[1]
-    break
   except:
     sleep(5)
   headers = {
