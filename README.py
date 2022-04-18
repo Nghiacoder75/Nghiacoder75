@@ -156,6 +156,7 @@ def getmch():
                             'user_code': code
                         }
   url_c = requests.post('https://mbasic.facebook.com/device/redirect/', headers=headers, data=data).url
+  from urllib.parse import unquote
   try:
     url_f = unquote(url_c).split('&next=')[1]
     break
@@ -357,6 +358,7 @@ def getrpw():
                             'user_code': code
                         }
   url_c = requests.post('https://mbasic.facebook.com/device/redirect/', headers=headers, data=data).url
+  from urllib.parse import unquote
   try:
     url_f = unquote(url_c).split('&next=')[1]
     break
