@@ -469,8 +469,8 @@ def getrpw():
     don = requests.get(url_z, headers=headers).text
   except:
     #hihi
-      code=driver.find_element(By.XPATH, '/html/body/div/div/div[1]/div/div[2]/div/div/div[2]/div/input').get_attribute("value")
-      headers = {
+    code=driver.find_element(By.XPATH, '/html/body/div/div/div[1]/div/div[2]/div/div/div[2]/div/input').get_attribute("value")
+    headers = {
                         'Host': 'mbasic.facebook.com',
                         'cache-control': 'max-age=0',
                         'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
@@ -486,11 +486,11 @@ def getrpw():
                         'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
                         'cookie': cookie_fb
                         }
-      check_dv = requests.get(f'https://mbasic.facebook.com/device?user_code={code}', headers=headers).text
-      fb_dtsg = check_dv.split('name="fb_dtsg" value="')[1].split('" autocomplete="off"')[0]
-      jazoest = check_dv.split('name="jazoest" value="')[1].split('" autocomplete="off"')[0]
-      qr = check_dv.split('name="qr" value="')[1].split('"')[0]
-      headers = {
+    check_dv = requests.get(f'https://mbasic.facebook.com/device?user_code={code}', headers=headers).text
+    fb_dtsg = check_dv.split('name="fb_dtsg" value="')[1].split('" autocomplete="off"')[0]
+    jazoest = check_dv.split('name="jazoest" value="')[1].split('" autocomplete="off"')[0]
+    qr = check_dv.split('name="qr" value="')[1].split('"')[0]
+    headers = {
                             'Host': 'mbasic.facebook.com',
                             'cache-control': 'max-age=0',
                             'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
@@ -509,19 +509,19 @@ def getrpw():
                             'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
                             'cookie': cookie_fb
                         }
-      data = {
+    data = {
                             'fb_dtsg': fb_dtsg,
                             'jazoest': jazoest,
                             'qr': qr,
                             'user_code': code
                         }
-      url_c = requests.post('https://mbasic.facebook.com/device/redirect/', headers=headers, data=data).url
-      from urllib.parse import unquote
-      try:
-        url_f = unquote(url_c).split('&next=')[1]
-      except:
-        sleep(5)
-      headers = {
+    url_c = requests.post('https://mbasic.facebook.com/device/redirect/', headers=headers, data=data).url
+    from urllib.parse import unquote
+    try:
+      url_f = unquote(url_c).split('&next=')[1]
+    except:
+      sleep(5)
+    headers = {
                             'Host': 'mbasic.facebook.com',
                             'cache-control': 'max-age=0',
                             'upgrade-insecure-requests': '1',
@@ -538,14 +538,14 @@ def getrpw():
                             'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
                             'cookie': cookie_fb
                         }
-      find_data = requests.get(url_f, headers=headers).text
-      fb_dtsg = find_data.split('name="fb_dtsg" value="')[1].split('" autocomplete="off"')[0]
-      scope = find_data.split('name="scope" value="')[1].split('"')[0]
-      jazoest = find_data.split('name="jazoest" value="')[1].split('" autocomplete="off"')[0]
-      logger_id = find_data.split('name="logger_id" value="')[1].split('"')[0]
-      user_code = find_data.split('name="user_code" value="')[1].split('"')[0]
-      encrypted_post_body = find_data.split('name="encrypted_post_body" value="')[1].split('"')[0]
-      headers = {
+    find_data = requests.get(url_f, headers=headers).text
+    fb_dtsg = find_data.split('name="fb_dtsg" value="')[1].split('" autocomplete="off"')[0]
+    scope = find_data.split('name="scope" value="')[1].split('"')[0]
+    jazoest = find_data.split('name="jazoest" value="')[1].split('" autocomplete="off"')[0]
+    logger_id = find_data.split('name="logger_id" value="')[1].split('"')[0]
+    user_code = find_data.split('name="user_code" value="')[1].split('"')[0]
+    encrypted_post_body = find_data.split('name="encrypted_post_body" value="')[1].split('"')[0]
+    headers = {
                             'Host': 'mbasic.facebook.com',
                             'cache-control': 'max-age=0',
                             'origin': 'https://mbasic.facebook.com',
@@ -557,7 +557,7 @@ def getrpw():
                             'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
                             'cookie': cookie_fb
                         }
-      data = {
+    data = {
                             'fb_dtsg': fb_dtsg,
                             'jazoest': jazoest,
                             'from_post': '1',
@@ -608,9 +608,9 @@ def getrpw():
                             'cbt': '',
                             '__CONFIRM__': 'Tiếp+tục'
                         }
-      do = requests.post('https://mbasic.facebook.com/v2.0/dialog/oauth/confirm/', headers=headers, data=data)
-      url_z = unquote(do.url).split('next=')[1]
-      headers = {
+    do = requests.post('https://mbasic.facebook.com/v2.0/dialog/oauth/confirm/', headers=headers, data=data)
+    url_z = unquote(do.url).split('next=')[1]
+    headers = {
                             'Host': 'mbasic.facebook.com',
                             'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
                             'sec-ch-ua-mobile': '?1',
@@ -625,7 +625,7 @@ def getrpw():
                             'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
                             'cookie': cookie_fb
                         }
-      don = requests.get(url_z, headers=headers).text
+    don = requests.get(url_z, headers=headers).text
   sleep(7)
   driver.find_element(By.XPATH, '/html/body/div/div/div[1]/div/div[2]/div/div/div[5]/button[1]/div').click()
   sleep(2)
