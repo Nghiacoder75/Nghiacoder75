@@ -274,7 +274,7 @@ def getmch():
   cokiemcn = lis_ck[0]
   headersa = {
 
-        'user-agent': "Mozilla/5.0 (Linux; Android 9; SM-J415F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.152 Mobile Safari/537.36",
+        'user-agent': 'Mozilla/5.0 (Linux; Android 9; SM-J415F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.152 Mobile Safari/537.36',
         'cookie': cokiemcn
                         }
   gétitekey= requests.get('https://www.machine-liker.com/verify/',headers=headersa).text
