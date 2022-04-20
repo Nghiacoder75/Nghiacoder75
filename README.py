@@ -63,7 +63,6 @@ def logo():
     print(log)
 logo()
 apikey=input("\033[1;37m➻\033[1;96m❥\033[1;96m Api Key Anycaptcha:\033[1;33m ")
-user=input("\033[1;37m➻\033[1;96m❥\033[1;96m User-Agent:\033[1;33m ")
 cookie_fb=input("\033[1;37m➻\033[1;96m❥\033[1;96m Coookie Facebook:\033[1;33m ")
 url=input("\033[1;37m➻\033[1;96m❥\033[1;96m Link Post Machine-Liker: \033[1;33m")
 link=input("\033[1;37m➻\033[1;96m❥\033[1;96m Link Post Rpwliker: \033[1;33m")
@@ -98,7 +97,6 @@ def getmch():
   cài_đặt_web.add_experimental_option('excludeSwitches', ['enable-logging'])
   cài_đặt_web22=cài_đặt_web
   cài_đặt_web22.add_argument("--window-size=580,800")
-  cài_đặt_web22.add_argument(f"user-agent={user}")
   cài_đặt_web22.add_experimental_option('useAutomationExtension', False)
   cài_đặt_web22.add_argument('--disable-blink-features=AutomationControlled')
   driver = webdriver.Chrome(options=cài_đặt_web22)
@@ -302,7 +300,6 @@ def getrpw():
   cài_đặt_web.add_experimental_option('excludeSwitches', ['enable-logging'])
   cài_đặt_web22=cài_đặt_web
   cài_đặt_web22.add_argument("--window-size=580,800")
-  cài_đặt_web22.add_argument(f"user-agent={user}")
   cài_đặt_web22.add_experimental_option('useAutomationExtension', False)
   cài_đặt_web22.add_argument('--disable-blink-features=AutomationControlled')
   driver = webdriver.Chrome(options=cài_đặt_web22)
