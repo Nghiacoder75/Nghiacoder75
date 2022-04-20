@@ -26,6 +26,7 @@ from selenium.webdriver.common.by import By
 from time import sleep
 getusg=requests.get("http://whatsmyuseragent.org/",headers={ "user-agent":"Mozilla/5.0 (Linux; Android 9; SM-J415F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.152 Mobile Safari/537.36"}).text
 user=getusg.split('<p class="intro-text">')[1].split('</p>')[0]
+print(user)
 xanh = '\033[1;35m';
 cay = '\033[1;92m';
 do = '\033[1;31m';
