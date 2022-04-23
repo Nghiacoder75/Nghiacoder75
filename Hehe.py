@@ -1,1 +1,1 @@
-Hehe
+print("hihi")
