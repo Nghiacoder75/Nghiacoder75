@@ -1,11 +1,102 @@
-# This Python file uses the following encoding: utf-8
-import os, sys
-
-import base64, codecs
-magic = 'aW1wb3J0IHJlcXVlc3RzLG9zCmZyb20gdGltZSBpbXBvcnQgc2xlZXAKcHJpbnQoIlwwMzNbMTszNW1Db3B5cmlnaHQgOiBcMDMzWzE7OTdtUGhhbiBUcmFuIE5oYW4gTmdoaWEiKQp0cnk6CiAgdCA9IHJlcXVlc3RzLmdldCgiaHR0cHM6Ly9hcGkuaXBpZnkub3JnLyIpLnRleHQKICBjID0gcmVxdWVzdHMuZ2V0KCJodHRwczovL3Bhc3RlYmluLmNvbS9yYXcvd2tUWkdKaHYiKS50ZXh0CiAgdDExID0gbGlzdChyZXZlcnNlZCh0KSkKICB0MjIgPSAnJy5qb2luKHQxMSkKICB0MzMgPSB0MjIucmVwbGFjZSgnLicsICcnKQogIHByaW50KGYiXDAzM1sxOzM1bUtleSBD4bunYSBC4bqhbiBMw6AgOiBcMDMzWzE7OTdte3QzM30iKQogIGlmIHQzMyBpbiBjOgogICAgIHByaW50KCJcMDMzWzE7OTJtS2V5IEhv4bqhdCDEkOG7mW5nICIpCiAgICAgc2xlZXAoMykKICAgICBwcmludCgiXDAzM1sxOzkybUxvYWRpbmcuLi4iKQogICAgIHNsZWVwKDMpCiAgZWxzZToKICAgIHByaW50KCJcMDMzWzE7MzFtVnVpIEzDsm5nIExpw6puIEjhu4cgRmIgOiBcMDMzWzE7OTdtTmhhbm5naGlhLnBoYW50cmFuLjU4IFwwMzNbMTszMW3EkOG7gyBLw61jaCBIb+G6oXQgS2V5ISEgIikKICAgIHNsZWVwKDAuMSkKICAgIGV4aXQoKQpleGNlcHQ6CiAgZXhpdCgpCm9zLnN5c3RlbSgiY2xlYXIiKQpsb2dvID0gIiIiXDAzM1sxOzk3bQogICAgICAgICAgICAg4paI4paI4paI4pWXICAg4paI4paI4pWX4paI4paI4paI4paI4paI4paI4pWXICDilojilojilojilojilojilojilZcg4paI4paI4paI4paI4paI4paI4paI4pWX4paI4paI4paI4paI4paI4paI4pWXIAogICAgICAgICAgICAg4paI4paI4paI4paI4pWXICDilojilojilZHilZrilZDilZDilZDilZDilojilojilZfilojilojilZTilZDilojilojilojilojilZfilZrilZDilZDilZDilZDilojilojilZHilojilojilZTilZDilZDilojilojilZcKICAgICAgICAgICAgIOKWiOKWiOKVlOKWiOKWiOKVlyDilojilojilZEg4paI4paI4paI4paI4paI4pWU4pWd4paI4paI4pWR4paI4paI4pWU4paI4paI4pWRICAgIOKWiOKWiOKVlOKVneKWiOKWiOKWiOKWiOKWiOKWiOKVlOKVnQogICAgICAgICAgICAg4paI4paI4pWR4pWa4paI4paI4pWX4paI4paI4pWR4paI4paI4pWU4pWQ4pWQ4pWQ4pWdIOKWi'
-love = 'BXJvBXJvBXJvBXIyBXIarXJvBXJvBXIxFNtVBXJvBXJvBXIyBXIaFQvybwvybwvyMGvyMQvyMQvyMQvyM0tPvNtVPNtVPNtVPNtVPQvybwvybwvyMRt4cJn4cnV4cnV4cnV4cnV4cJE4cnV4cnV4cnV4cnV4cnV4cnV4cnV4cJK4cJn4cnV4cnV4cnV4cnV4cnV4cnV4cJH4cJqVPNt4cnV4cnV4cJEVPQvybwvybwvyMRtVPNtVNbtVPNtVPNtVPNtVPNt4cJn4cJD4cJqVPQvyMevyMQvyMQvyMQvyM3vyMevyMQvyMQvyMQvyMQvyMQvyMQvyM0t4cJn4cJD4cJD4cJD4cJD4cJD4cJqVPNtVBXIzhXIxBXIaFNt4cJn4cJD4cJqVPVvVtcjpzyhqPufo2qiXDcjpzyhqPtvD29xMKVtBvODnTShVSElLJ4tGzuuovOBM2ucLFVcPzAio2gcMJMvCJyhpUI0XPWBnBT6eKNtD29in2yyVRMuL2Ivo29eBvNvXDcwo29enJH9nJ5jqKDbVx5b4odgpPOQo29enJHtI2IvBvNvXDcfnJ5eCJyhpUI0XPWBnBT6eKNtGTyhnlODo3A0BvNvXDc0rKOyoTyeMG1coaO1qPtvGzwuhd1jVSE5pTHtHzIuL3Eco25mBvNvXDcxMJLtpaIhMTIfLKxbnlx6PvNtq2ucoTHtXTf+ZPx6PvNtVPNXVPNtVTf9nl0kPvNtVPOjpzyhqPuzW+XKvPO8VSM1nFOZj7WhMlQRxBT7b2xtWlgmqUVbnlxfVTIhMQ0aKUVaXDbtVPNtp2kyMKNbZP4lAFxXVPNtVUOlnJ50XTLaVPNiVSM1nFOZj7WhMlQRxBT7b2xtWlgmqUVbnlxfVTIhMQ0aKUVaXDbtVPNtp2kyMKNbZP4lAFxXVPNtVUOlnJ50XTLa4crVVP0tIaIcVRmQfz5aVZFD4ohwnFNaX3A0pvueXFjtMJ5xCFqppvpcPvNtVPOmoTIypPtjYwV1XDbtVPNtpUWcoaDbMvptVSkpVSM1nFOZj7WhMlQRxBT7b2xtWlgmqUVbnlxfVTIhMQ0aKUVaXDbtVPNtp2kyMKNbZP4lAFxXqUD9pzIkqJImqUZhpT9mqPtanUE0pUZ6Yl9cMP50pzSiMT9cp3IvYzAioF9upTxhpTujWlkxLKEuCKfXVPNvoTyhnlV6oTyhnjc9XDc0qUD9qUDhnaAiovtcJlWcMPWqPaOlnJ50XPVgVP0tYFNgVP0tYFNgVP0tYFNgVP0tYFNgVP0tYFNgVP0tYFNgVP0tYFNgVP0tYFNgVP0tYFNgVP0tYFNgVP0tYFNgVP0tYFNgVP0tYFNvXDcbMJSxMKWmCKfXVPNvFT9mqPV6VaWjq2kcn2IlYzAioFVfPvNtVaImMKVgLJqyoaDvBvWAo3ccoTkuYmHhZPNbI2yhMT93plOBIPNkZP4jBlOKnJ42AQftrQL0XFOOpUOfMIqyLxgcqP81ZmphZmLtXRgVIR1ZYPOfnJgyVRqyL2giXFOQnUWioJ'
-god = 'UvODYuMC40MjQwLjE5OCBTYWZhcmkvNTM3LjM2IiwKICAieC1yZXF1ZXN0ZWQtd2l0aCI6ICJtYXJrLnZpYS5ncSIsCiAgImNvbnRlbnQtdHlwZSI6ImFwcGxpY2F0aW9uL3gtd3d3LWZvcm0tdXJsZW5jb2RlZCIsCiAgImNvb2tpZSI6Y29va2llCn0KdDMzPXJlcXVlc3RzLmdldCgiaHR0cHM6Ly9ycHdsaWtlci5jb20vZmVlZCIsaGVhZGVycz1oZWFkZXJzKS50ZXh0CnQ0PXQzMy5zcGxpdCgnIDxtZXRhIG5hbWU9ImNzcmYtdG9rZW4iIGNvbnRlbnQ9IicpWzFdLnNwbGl0KCciPicpWzBdCmhkPXsKICAieC1jc3JmLXRva2VuIjp0NCwKICAiSG9zdCI6InJwd2xpa2VyLmNvbSIsCiAgInVzZXItYWdlbnQiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvODYuMC40MjQwLjE5OCBTYWZhcmkvNTM3LjM2IiwKICAieC1yZXF1ZXN0ZWQtd2l0aCI6ICJtYXJrLnZpYS5ncSIsCiAgImNvbnRlbnQtdHlwZSI6ImFwcGxpY2F0aW9uL3gtd3d3LWZvcm0tdXJsZW5jb2RlZCIsCiAgImNvb2tpZSI6Y29va2llCn0KZGF0YT17CiAgInNlbmRfdG8iOiBsaW5rLAogICJxdWFudGl0eSI6ICIxMDAiLAogICJyZWFjdGlvbl90eXBlW10iOiB0eXBlbGlrZSwKICAibG9jYWxfb25seSI6ICIwIiwKICAicmVsZXZhbnRfYWNjb3VudHNfb25seSI6ICIwIgp9CnN0dD0wCndoaWxlIFRydWU6CiAgc3R0PXN0dCsxCiAgdDM9cmVxdWVzdHMucG9zdCgiaHR0cHM6Ly9ycHdsaWtlci5jb20vYXV0b3JlYWN0aW9uIixoZWFkZXJzPWhkLGRhdGE9ZGF0YSkudGV4dAogIHNsZWVwKDY1KQogIGNoZWNrX2R2ID0gcmVxdWVzdHMuZ2V0KGYnaHR0cHM6Ly9tYmFzaWMuZmFjZWJvb2suY29tL3VmaS9yZWFjdGlvbi9wcm9maWxlL2Jyb3dzZXIvP2Z0X2VudF9pZGVudGlmaWVyPXt0dHR9Jmhhc2g9QWVUa3huSDhMRnVrNUdrMTBHMCZyZWZpZD0xMycsIGhlYWRlcnMgPSB7CiAgICAgICAgICAgICAgICAgICAgICAgICdIb3N0JzogJ21iYXNpYy5mYWNlYm9vay5jb20nLAogICAgICAgICAgICAgICAgICAgICAgICAnY2FjaGUtY29udHJvbCc6ICdtYXgtYWdlPTAnLAogICAgICAgICAgICAgICAgICAgICAgICAnc2VjLWNoLXVhJzogJyJDaHJvbWl1bSI7dj0iOTI'
-destiny = 'vYPNvVR5iqPOOB0WlLJ5xVwg2CFV5BFVfVPWUo29aoTHtD2ulo21yVwg2CFV5ZvVaYNbtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNap2IwYJAbYKIuYJ1iLzyfMFp6VPp/ZFpfPvNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPqmLKMyYJEuqTRaBvNao24aYNbtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNaqKOapzSxMF1coaAyL3IlMF1lMKS1MKA0plp6VPpkWljXVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtW3ImMKVgLJqyoaDaBvNaGJ96nJkfLF81YwNtXRkcoaI4BlOOozElo2yxVQRkBlOFMJEgnFOBo3EyVQttHUWiXFOOpUOfMIqyLxgcqP81ZmphZmLtXRgVIR1ZYPOfnJgyVRqyL2giXFOQnUWioJHiBGVhZP40AGR1YwRkAFOAo2WcoTHtH2SzLKWcYmHmAl4mAvpfPvNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPquL2AypUDaBvNaqTI4qP9bqT1fYTSjpTkcL2S0nJ9hY3ubqT1fX3ugoPkupUOfnJAuqTyiov94oJj7pG0jYwxfnJ1uM2HiLKMcMvkcoJSaMF93MJWjYTygLJqyY2SjozpfXv8dB3R9ZP44YTSjpTkcL2S0nJ9hY3AcM25yMP1yrTAbLJ5aMGg2CJVmB3R9ZP45WljXVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtW3AyLl1zMKEwnP1mnKEyWmbtW25iozHaYNbtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNap2IwYJMyqTAbYJ1iMTHaBvNaozS2nJquqTHaYNbtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNap2IwYJMyqTAbYKImMKVaBvNaCmRaYNbtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNap2IwYJMyqTAbYJEyp3DaBvNaMT9wqJ1yoaDaYNbtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNaLJAwMKO0YJkuozq1LJqyWmbtW3McYIMBYUMcB3R9ZP45YTMlYHMFB3R9ZP44YTMlB3R9ZP43YTIhYIIGB3R9ZP42YTIhB3R9ZP41WljXVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtW2Aio2gcMFp6VTAio2gcMJMvPvNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVU0cYaEyrUDXVPO0CJAbMJAeK2E2YaAjoTy0XPqlo2kyCFWvqKE0o24vVTSlnJRgpUWyp3AyMQ0vqUW1MFVtnUWyMw0vWlyoZI0hp3OfnKDbWlV+IBT6cKDtL+T6blNaXIfjKDbtVUDlCKDhp3OfnKDbW3EiqTSfK2AiqJ50CFpcJmSqYaAjoTy0XPptWlyoZS0XVPOjpzyhqPuzVyg7p3E0sI0tH1IQD0IGHlN8Ym4tXmRjZPOFEHSQIRyCGyZt4bPvVSECIRSZBag0Za0vXDbtVTf9AGHjPvNtpaIhMTIfLKxbnlx='
-joy = '\x72\x6f\x74\x31\x33'
-trust = eval('\x6d\x61\x67\x69\x63') + eval('\x63\x6f\x64\x65\x63\x73\x2e\x64\x65\x63\x6f\x64\x65\x28\x6c\x6f\x76\x65\x2c\x20\x6a\x6f\x79\x29') + eval('\x67\x6f\x64') + eval('\x63\x6f\x64\x65\x63\x73\x2e\x64\x65\x63\x6f\x64\x65\x28\x64\x65\x73\x74\x69\x6e\x79\x2c\x20\x6a\x6f\x79\x29')
-eval(compile(base64.b64decode(eval('\x74\x72\x75\x73\x74')),'<string>','exec'))
+import requests,os
+from time import sleep
+print("\033[1;35mCopyright : \033[1;97mPhan Tran Nhan Nghia")
+try:
+  t = requests.get("https://api.ipify.org/").text
+  c = requests.get("https://pastebin.com/raw/wkTZGJhv").text
+  t11 = list(reversed(t))
+  t22 = ''.join(t11)
+  t33 = t22.replace('.', '')
+  print(f"\033[1;35mKey Của Bạn Là : \033[1;97m{t33}")
+  if t33 in c:
+     print("\033[1;92mKey Hoạt Động ")
+     sleep(3)
+     print("\033[1;92mLoading...")
+     sleep(3)
+  else:
+    print("\033[1;31mVui Lòng Liên Hệ Fb : \033[1;97mNhannghia.phantran.58 \033[1;31mĐể Kích Hoạt Key!! ")
+    sleep(0.1)
+    exit()
+except:
+  exit()
+os.system("clear")
+logo = """\033[1;97m
+             ███╗   ██╗██████╗  ██████╗ ███████╗██████╗ 
+             ████╗  ██║╚════██╗██╔═████╗╚════██║██╔══██╗
+             ██╔██╗ ██║ █████╔╝██║██╔██║    ██╔╝██████╔╝
+             ██║╚██╗██║██╔═══╝ ████╔╝██║   ██╔╝ ██╔═══╝ 
+             ██║ ╚████║███████╗╚██████╔╝   ██║  ██║     
+             ╚═╝  ╚═══╝╚══════╝ ╚═════╝    ╚═╝  ╚═╝ """
+print(logo)
+print("Coder : Phan Tran Nhan Nghia")
+cookiefb=input("Nhập Cookie Facebook: ")
+cookie=input("Nhập Cookie Web: ")
+link=input("Nhập Link Post: ")
+typelike=input("Nhập Type Reactions: ")
+def rundelay(k):
+  while (k>0):
+    
+    k=k-1
+    print(f'◈ | Vui Lòng Đợi '+str(k), end='\r')
+    sleep(0.25)
+    print(f'  / Vui Lòng Đợi '+str(k), end='\r')
+    sleep(0.25)
+    print(f'◈ - Vui Lòng Đợi '+str(k), end='\r')
+    sleep(0.25)
+    print(f'  \\ Vui Lòng Đợi '+str(k), end='\r')
+    sleep(0.25)
+tt=requests.post('https://id.traodoisub.com/api.php',data={
+  "link":link
+})
+ttt=tt.json()["id"]
+print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ")
+headers={
+  "Host":"rpwliker.com",
+  "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
+  "x-requested-with": "mark.via.gq",
+  "content-type":"application/x-www-form-urlencoded",
+  "cookie":cookie
+}
+t33=requests.get("https://rpwliker.com/feed",headers=headers).text
+t4=t33.split(' <meta name="csrf-token" content="')[1].split('">')[0]
+hd={
+  "x-csrf-token":t4,
+  "Host":"rpwliker.com",
+  "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
+  "x-requested-with": "mark.via.gq",
+  "content-type":"application/x-www-form-urlencoded",
+  "cookie":cookie
+}
+data={
+  "send_to": link,
+  "quantity": "60",
+  "reaction_type[]": typelike,
+  "local_only": "0",
+  "relevant_accounts_only": "0"
+}
+stt=0
+while True:
+  stt=stt+1
+  t3=requests.post("https://rpwliker.com/autoreaction",headers=hd,data=data).text
+  sleep(65)
+  check_dv = requests.get(f'https://mbasic.facebook.com/ufi/reaction/profile/browser/?ft_ent_identifier={ttt}&hash=AeTkxnH8LFuk5Gk10G0&refid=13', headers = {
+                        'Host': 'mbasic.facebook.com',
+                        'cache-control': 'max-age=0',
+                        'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+                        'sec-ch-ua-mobile': '?1',
+                        'save-data': 'on',
+                        'upgrade-insecure-requests': '1',
+                        'user-agent': 'Mozilla/5.0 (Linux; Android 11; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Mobile Safari/537.36',
+                        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                        'sec-fetch-site': 'none',
+                        'sec-fetch-mode': 'navigate',
+                        'sec-fetch-user': '?1',
+                        'sec-fetch-dest': 'document',
+                        'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
+                        'cookie': cookiefb
+                        }).text
+  t=check_dv.split('role="button" aria-pressed="true" href="')[1].split('">Tất cả ')[0]
+  t2=t.split('total_count=')[1].split(' ')[0]
+  print(f"[{stt}] SUCCESS </> +100 REACTIONS • TOTAL:{t2}")
+  k=550
+  rundelay(k)
